@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../api/axiosConfig';
 
 import UserManagement from './UserManagement';
@@ -12,6 +13,7 @@ const AdminDashboard: React.FC = () => {
     const [view, setView] = useState<'stats' | 'users' | 'projects' | 'requests' | 'services'>('stats');
 
     const { logout } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('admin/stats').then(({ data }) => setStats(data));
@@ -30,8 +32,8 @@ const AdminDashboard: React.FC = () => {
                 <button className="btn-primary" onClick={() => setView('projects')}>Projects</button>
                 <button className="btn-primary" onClick={() => setView('requests')}>Requests</button>
                 <button className="btn-primary" onClick={() => setView('services')}>Services</button>
-                <button className="btn-primary" onClick={() => window.location.href = '/admin/messages'}>Messages</button>
-                <button className="btn-primary" onClick={() => window.location.href = '/admin/profile'}>Profile</button>
+                <button className="btn-primary" onClick={() => navigate('/admin/messages')}>Messages</button>
+                <button className="btn-primary" onClick={() => navigate('/admin/profile')}>Profile</button>
             </div>
 
             {view === 'stats' && stats && (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../api/axiosConfig';
 import { useAuth } from '../../context/AuthContext';
 
@@ -8,6 +9,7 @@ const ClientDashboard: React.FC = () => {
     const [selectedService, setSelectedService] = useState('');
     const [description, setDescription] = useState('');
     const { logout } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('client/projects').then(({ data }) => setProjects(data));
@@ -28,8 +30,8 @@ const ClientDashboard: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1>Client Portal</h1>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button className="btn-primary" onClick={() => window.location.href = '/client/messages'}>Messages</button>
-                    <button className="btn-primary" onClick={() => window.location.href = '/client/profile'}>Profile</button>
+                    <button className="btn-primary" onClick={() => navigate('/client/messages')}>Messages</button>
+                    <button className="btn-primary" onClick={() => navigate('/client/profile')}>Profile</button>
                     <button className="btn-primary" onClick={logout} style={{ background: 'var(--danger)' }}>Logout</button>
                 </div>
 

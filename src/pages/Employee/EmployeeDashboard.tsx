@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../api/axiosConfig';
 import { useAuth } from '../../context/AuthContext';
 
 const EmployeeDashboard: React.FC = () => {
     const [projects, setProjects] = useState<any[]>([]);
     const { logout } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         api.get('employee/projects').then(({ data }) => setProjects(data));
@@ -20,8 +22,8 @@ const EmployeeDashboard: React.FC = () => {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h1>Employee Portal</h1>
                 <div style={{ display: 'flex', gap: '1rem' }}>
-                    <button className="btn-primary" onClick={() => window.location.href = '/employee/messages'}>Messages</button>
-                    <button className="btn-primary" onClick={() => window.location.href = '/employee/profile'}>Profile</button>
+                    <button className="btn-primary" onClick={() => navigate('/employee/messages')}>Messages</button>
+                    <button className="btn-primary" onClick={() => navigate('/employee/profile')}>Profile</button>
                     <button className="btn-primary" onClick={logout} style={{ background: 'var(--danger)' }}>Logout</button>
                 </div>
 
