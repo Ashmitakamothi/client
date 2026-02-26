@@ -5,12 +5,12 @@ const ServiceRequests: React.FC = () => {
     const [requests, setRequests] = useState<any[]>([]);
 
     useEffect(() => {
-        api.get('/admin/service-requests').then(({ data }) => setRequests(data));
+        api.get('admin/service-requests').then(({ data }) => setRequests(data));
     }, []);
 
     const handleApprove = async (id: string) => {
-        await api.put(`/admin/service-requests/${id}/approve`);
-        api.get('/admin/service-requests').then(({ data }) => setRequests(data));
+        await api.put(`admin/service-requests/${id}/approve`);
+        api.get('admin/service-requests').then(({ data }) => setRequests(data));
     };
 
     return (

@@ -9,20 +9,20 @@ const UserManagement: React.FC = () => {
     const [role, setRole] = useState('EMPLOYEE');
     const [clientCompany, setClientCompany] = useState('');
 
-    const fetchUsers = () => api.get('/admin/users').then(({ data }) => setUsers(data));
+    const fetchUsers = () => api.get('admin/users').then(({ data }) => setUsers(data));
 
     useEffect(() => { fetchUsers(); }, []);
 
     const handleCreate = async (e: React.FormEvent) => {
         e.preventDefault();
-        await api.post('/admin/users', { name, email, password, role, clientCompany });
+        await api.post('admin/users', { name, email, password, role, clientCompany });
         setName(''); setEmail(''); setPassword(''); setClientCompany('');
         fetchUsers();
     };
 
     const handleDelete = async (id: string) => {
         if (!window.confirm('Are you sure you want to remove this user?')) return;
-        await api.delete(`/admin/users/${id}`);
+        await api.delete(`admin/users/${id}`);
         fetchUsers();
     };
 

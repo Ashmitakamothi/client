@@ -12,7 +12,7 @@ const Profile: React.FC = () => {
     const handleUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await api.put('/auth/profile', { name, email, password });
+            await api.put('auth/profile', { name, email, password });
             setMessage('Profile updated successfully!');
         } catch (err) {
             setMessage('Failed to update profile.');

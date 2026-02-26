@@ -20,7 +20,7 @@ const ServiceManagement: React.FC = () => {
     }, []);
 
     const fetchServices = async () => {
-        const { data } = await api.get('/admin/services');
+        const { data } = await api.get('admin/services');
         setServices(data);
     };
 
@@ -28,9 +28,9 @@ const ServiceManagement: React.FC = () => {
         e.preventDefault();
         try {
             if (editingId) {
-                await api.put(`/admin/services/${editingId}`, { name, description, price: price === '' ? undefined : price });
+                await api.put(`admin/services/${editingId}`, { name, description, price: price === '' ? undefined : price });
             } else {
-                await api.post('/admin/services', { name, description, price: price === '' ? undefined : price });
+                await api.post('admin/services', { name, description, price: price === '' ? undefined : price });
             }
             setName('');
             setDescription('');
@@ -51,7 +51,7 @@ const ServiceManagement: React.FC = () => {
 
     const handleDelete = async (id: string) => {
         if (window.confirm('Are you sure you want to delete this service?')) {
-            await api.delete(`/admin/services/${id}`);
+            await api.delete(`admin/services/${id}`);
             fetchServices();
         }
     };

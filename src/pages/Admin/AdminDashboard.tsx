@@ -14,7 +14,7 @@ const AdminDashboard: React.FC = () => {
     const { logout } = useAuth();
 
     useEffect(() => {
-        api.get('/admin/stats').then(({ data }) => setStats(data));
+        api.get('admin/stats').then(({ data }) => setStats(data));
     }, []);
 
     return (

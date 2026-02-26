@@ -7,12 +7,12 @@ const EmployeeDashboard: React.FC = () => {
     const { logout } = useAuth();
 
     useEffect(() => {
-        api.get('/employee/projects').then(({ data }) => setProjects(data));
+        api.get('employee/projects').then(({ data }) => setProjects(data));
     }, []);
 
     const updateStatus = async (id: string, status: string) => {
-        await api.put(`/employee/projects/${id}/status`, { status });
-        api.get('/employee/projects').then(({ data }) => setProjects(data));
+        await api.put(`employee/projects/${id}/status`, { status });
+        api.get('employee/projects').then(({ data }) => setProjects(data));
     };
 
     return (

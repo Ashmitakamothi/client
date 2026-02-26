@@ -10,14 +10,14 @@ const ClientDashboard: React.FC = () => {
     const { logout } = useAuth();
 
     useEffect(() => {
-        api.get('/client/projects').then(({ data }) => setProjects(data));
-        api.get('/client/services').then(({ data }) => setServices(data));
+        api.get('client/projects').then(({ data }) => setProjects(data));
+        api.get('client/services').then(({ data }) => setServices(data));
     }, []);
 
     const handleRequest = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!selectedService) return alert('Please select a service');
-        await api.post('/client/service-request', { service: selectedService, description });
+        await api.post('client/service-request', { service: selectedService, description });
         setSelectedService(''); setDescription('');
         alert('Service requested successfully!');
     };

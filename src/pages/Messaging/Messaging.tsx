@@ -10,13 +10,13 @@ const Messaging: React.FC = () => {
     const { user, logout } = useAuth();
 
     useEffect(() => {
-        api.get('/messages/users').then(({ data }) => setUsers(data));
+        api.get('messages/users').then(({ data }) => setUsers(data));
     }, []);
 
 
     useEffect(() => {
         if (selectedUser) {
-            const fetchMessages = () => api.get(`/messages/${selectedUser._id}`).then(({ data }) => setMessages(data));
+            const fetchMessages = () => api.get(`messages/${selectedUser._id}`).then(({ data }) => setMessages(data));
             fetchMessages();
             const interval = setInterval(fetchMessages, 3000);
             return () => clearInterval(interval);
@@ -26,9 +26,9 @@ const Messaging: React.FC = () => {
     const handleSend = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!content.trim() || !selectedUser) return;
-        await api.post('/messages', { receiverId: selectedUser._id, content });
+        await api.post('messages', { receiverId: selectedUser._id, content });
         setContent('');
-        api.get(`/messages/${selectedUser._id}`).then(({ data }) => setMessages(data));
+        api.get(`messages/${selectedUser._id}`).then(({ data }) => setMessages(data));
     };
 
 

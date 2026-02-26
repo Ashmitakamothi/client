@@ -6,13 +6,13 @@ const ProjectManagement: React.FC = () => {
     const [users, setUsers] = useState<any[]>([]);
 
     useEffect(() => {
-        api.get('/admin/projects').then(({ data }) => setProjects(data));
-        api.get('/admin/users').then(({ data }) => setUsers(data));
+        api.get('admin/projects').then(({ data }) => setProjects(data));
+        api.get('admin/users').then(({ data }) => setUsers(data));
     }, []);
 
     const handleAssign = async (projectId: string, employeeIds: string[]) => {
-        await api.put(`/admin/projects/${projectId}/assign`, { employeeIds });
-        api.get('/admin/projects').then(({ data }) => setProjects(data));
+        await api.put(`admin/projects/${projectId}/assign`, { employeeIds });
+        api.get('admin/projects').then(({ data }) => setProjects(data));
     };
 
     return (
